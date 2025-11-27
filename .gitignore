@@ -1,0 +1,14 @@
+Backendgg/.env
+Backendgg/.idea/
+Backendgg/.mvn/
+Backendgg/target/
+Backendgg/mvnw
+Backendgg/mvnw.cmd
+Frontendgg/node_modules
+Frontendgg/dist/
+Frontendgg/build/
+Frontendgg/.env
+Frontendgg/.vscode/
+Frontendgg/.idea/
+Frontendgg/.DS_Store
+Frontendgg/.vite/
