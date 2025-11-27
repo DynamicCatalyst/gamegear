@@ -94,7 +94,7 @@ This repository is primarily focused on the **backend**: secure APIs, payment pr
 
 **ER Diagram (backend)**  
 
-![GameGear ER Diagram](https://i.ibb.co/RrR1Km4/Untitled.png)
+![GameGear ER Diagram](https://github-production-user-asset-6210df.s3.amazonaws.com/139992935/519812856-bda85712-d249-43cb-8942-d7d15c8da456.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251127%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251127T155641Z&X-Amz-Expires=300&X-Amz-Signature=113f44fbe6a9d270cd0e01e2167c2141140df151653bc85145d87cdbe78a6302&X-Amz-SignedHeaders=host)
 
 
 ## 🎥 Demo
