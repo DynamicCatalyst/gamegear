@@ -1,9 +1,11 @@
+#BackendIgnoreFiles
 Backendgg/.env
 Backendgg/.idea/
 Backendgg/.mvn/
 Backendgg/target/
 Backendgg/mvnw
 Backendgg/mvnw.cmd
+#FrontendIgnoreFiles
 Frontendgg/node_modules
 Frontendgg/dist/
 Frontendgg/build/
