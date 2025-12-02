@@ -4,6 +4,8 @@ GameGear is a full‑stack e‑commerce platform built with a **Spring Boot** ba
 This repository is primarily focused on the **backend**: secure APIs, payment processing, AI‑powered image search, and JWT‑based authentication.
 
 ---
+[Project Link](https://gamegear.one)
+---
 
 ## 🧩 Project Overview
 
