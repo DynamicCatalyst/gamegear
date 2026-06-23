@@ -1,0 +1,7 @@
+target/
+.idea/
+.mvn/
+*.iml
+# Never bake secrets into the image — keys are injected at runtime via env.
+.env
+HELP.md

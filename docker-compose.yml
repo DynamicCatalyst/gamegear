@@ -1,0 +1,46 @@
+# Brings up the whole stack with: docker compose up --build
+# db = PostgreSQL 16, backend = Spring Boot (8081), frontend = Angular via nginx (4200).
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: gamegear
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Root
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d gamegear"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  backend:
+    build: ./Backendgg
+    ports:
+      - "8081:8081"
+    # Secrets come from Backendgg/.env at runtime (copy .env.example to .env).
+    env_file:
+      - ./Backendgg/.env
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/gamegear
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: Root
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build: ./gamegear-angular
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  pgdata:

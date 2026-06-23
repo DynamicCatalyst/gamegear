@@ -1,0 +1,24 @@
+<div class="container-fluid mt-3">
+  <app-search-bar />
+
+  <div class="sidebar-container mt-3">
+    <app-sidebar />
+
+    <div class="flex-grow-1">
+      @if (loading()) {
+        <app-load-spinner />
+      } @else if (displayed().length > 0) {
+        <app-product-card [products]="displayed()" />
+        <app-paginator />
+      } @else {
+        <div class="text-center text-muted py-5 my-4 border rounded bg-light">
+          <i class="bi bi-search fs-1 d-block mb-2"></i>
+          <p class="mb-0">No products found.</p>
+          @if (isImageSearch()) {
+            <p class="small mb-0">No products match this image.</p>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

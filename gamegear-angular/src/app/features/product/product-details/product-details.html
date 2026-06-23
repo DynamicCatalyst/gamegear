@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  @if (loading()) {
+    <app-load-spinner />
+  } @else if (product(); as p) {
+    <div class="product-details">
+      <div class="me-4" style="flex: 1;">
+        <div class="image-gallery">
+          @if (p.images.length) {
+            @for (img of p.images; track img.id) {
+              <div class="update-image-container">
+                <app-product-image [images]="[img]" [alt]="p.name" />
+              </div>
+            }
+          } @else {
+            <div class="update-image-container">
+              <app-product-image [images]="[]" [alt]="p.name" />
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="details-container">
+        <h1 class="product-name">{{ p.name }}</h1>
+        <p class="text-muted mb-1">{{ p.brand }}</p>
+        <p class="price fs-4">{{ p.price | currency:'INR':'symbol':'1.0-0' }}</p>
+        <p class="product-description">{{ p.description }}</p>
+        <app-stock-status [inventory]="p.inventory" />
+
+        <div class="quantity-input my-3" style="max-width: 200px;">
+          <app-quantity-updater
+            [quantity]="quantity()"
+            [disabled]="p.inventory === 0"
+            (increase)="increase()"
+            (decrease)="decrease()" />
+        </div>
+
+        <div class="buy-button-container">
+          <button type="button" class="add-to-cart-button" [disabled]="p.inventory === 0"
+                  (click)="addToCart(false)">
+            Add to cart
+          </button>
+          <button type="button" class="buy-now-button" [disabled]="p.inventory === 0"
+                  (click)="addToCart(true)">
+            Buy now
+          </button>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <p class="text-muted">Product not found.</p>
+  }
+</div>

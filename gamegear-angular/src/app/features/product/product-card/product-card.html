@@ -1,0 +1,37 @@
+<div class="d-flex flex-wrap justify-content-center">
+  @for (product of products(); track product.id) {
+    <div class="card home-product-card">
+      <a class="link" [routerLink]="['/product', product.id, 'details']">
+        <div class="image-container">
+          <app-product-image [images]="product.images" [alt]="product.name" />
+        </div>
+      </a>
+      <div class="card-body">
+        <a class="link" [routerLink]="['/product', product.id, 'details']">
+          <h6 class="product-text text-truncate" [title]="product.name">{{ product.name }}</h6>
+        </a>
+        <p class="price mb-1">{{ product.price | currency:'INR':'symbol' }}</p>
+        <app-stock-status [inventory]="product.inventory" />
+
+        <div class="d-flex gap-2 mt-2">
+          <a class="add-to-cart-button text-decoration-none flex-grow-1 text-center"
+             [routerLink]="['/product', product.id, 'details']">
+            View
+          </a>
+          @if (isAdmin()) {
+            <a class="btn btn-outline-secondary btn-sm"
+               [routerLink]="['/update-product', product.id, 'update']" aria-label="Edit product">
+              <i class="bi bi-pencil"></i>
+            </a>
+            <button type="button" class="btn btn-outline-danger btn-sm"
+                    (click)="delete(product.id)" aria-label="Delete product">
+              <i class="bi bi-trash"></i>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  } @empty {
+    <p class="text-muted py-4">No products available.</p>
+  }
+</div>

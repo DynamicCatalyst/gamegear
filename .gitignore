@@ -1,0 +1,30 @@
+# Backend (Spring Boot / Maven)
+Backendgg/.env
+Backendgg/target/
+Backendgg/.idea/
+Backendgg/.mvn/
+Backendgg/mvnw
+Backendgg/mvnw.cmd
+
+# Frontend (Angular)
+gamegear-angular/node_modules/
+gamegear-angular/dist/
+gamegear-angular/.angular/
+gamegear-angular/.env
+gamegear-angular/.vscode/
+
+# IDEs / editors
+.idea/
+.vscode/
+*.iml
+
+# Tooling / assistant artifacts
+.claude/
+.deepcode/
+gamegear-angular/.claude/
+Backendgg/.agents/
+Backendgg/skills-lock.json
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,105 @@
+<div class="container mt-4">
+  <h1 class="h3 mb-3">Update Product</h1>
+
+  @if (loading()) {
+    <app-load-spinner />
+  } @else if (product(); as p) {
+    <div class="row g-4">
+      <!-- Detail form -->
+      <div class="col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h2 class="h5 mb-3">Details</h2>
+            <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+              <div class="mb-3">
+                <label class="form-label" for="name">Product name</label>
+                <input id="name" type="text" class="form-control" formControlName="name"
+                       [class.is-invalid]="form.controls.name.invalid && form.controls.name.touched" />
+              </div>
+
+              <div class="row g-2">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label" for="price">Price</label>
+                  <input id="price" type="number" step="0.01" class="form-control"
+                         formControlName="price"
+                         [class.is-invalid]="form.controls.price.invalid && form.controls.price.touched" />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label" for="inventory">Inventory</label>
+                  <input id="inventory" type="number" class="form-control" formControlName="inventory"
+                         [class.is-invalid]="form.controls.inventory.invalid && form.controls.inventory.touched" />
+                </div>
+              </div>
+
+              <app-brand-selector [(selectedBrand)]="brand" />
+              <app-category-selector [(selectedCategory)]="category" />
+
+              <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea id="description" rows="3" class="form-control"
+                          formControlName="description"></textarea>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary" [disabled]="saving()">
+                  @if (saving()) {
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+                  }
+                  Save changes
+                </button>
+                <button type="button" class="btn btn-outline-secondary" (click)="done()">
+                  Done
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image management -->
+      <div class="col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h2 class="h5 mb-0">Images</h2>
+              <button type="button" class="btn btn-outline-secondary btn-sm"
+                      (click)="showUploader.set(!showUploader())">
+                <i class="bi bi-plus"></i> Add images
+              </button>
+            </div>
+
+            @if (showUploader()) {
+              <app-image-uploader [productId]="p.id" />
+              <hr />
+            }
+
+            <div class="image-gallery">
+              @for (img of images(); track img.id) {
+                <div class="text-center">
+                  <div class="update-image-container">
+                    <app-product-image [images]="[img]" [alt]="p.name" />
+                  </div>
+                  <div class="d-flex gap-1 justify-content-center mt-1">
+                    <label class="btn btn-outline-secondary btn-sm mb-0" [attr.aria-label]="'Replace image'">
+                      <i class="bi bi-arrow-repeat"></i>
+                      <input type="file" accept="image/*" class="d-none"
+                             (change)="replaceImage(img, $event)" />
+                    </label>
+                    <button type="button" class="btn btn-outline-danger btn-sm"
+                            (click)="removeImage(img)" aria-label="Remove image">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              } @empty {
+                <p class="text-muted mb-0">No images yet.</p>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <p class="text-muted">Product not found.</p>
+  }
+</div>

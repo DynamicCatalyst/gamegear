@@ -1,0 +1,123 @@
+<div class="container mt-4">
+  <h1 class="h3 mb-3">Checkout</h1>
+
+  @if (loading()) {
+    <app-load-spinner />
+  } @else {
+    <div class="row g-4">
+      <!-- Billing + payment -->
+      <div class="col-lg-7">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h2 class="checkout-form-title">Billing details</h2>
+            <form [formGroup]="form" novalidate>
+              <div class="row g-2">
+                <div class="col-md-6">
+                  <label class="form-label" for="firstName">First name</label>
+                  <input id="firstName" type="text" class="form-control" formControlName="firstName"
+                         [class.is-invalid]="form.controls.firstName.invalid && form.controls.firstName.touched" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="lastName">Last name</label>
+                  <input id="lastName" type="text" class="form-control" formControlName="lastName"
+                         [class.is-invalid]="form.controls.lastName.invalid && form.controls.lastName.touched" />
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="email">Email</label>
+                  <input id="email" type="email" class="form-control" formControlName="email"
+                         [class.is-invalid]="form.controls.email.invalid && form.controls.email.touched" />
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="street">Street</label>
+                  <input id="street" type="text" class="form-control" formControlName="street"
+                         [class.is-invalid]="form.controls.street.invalid && form.controls.street.touched" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="city">City</label>
+                  <input id="city" type="text" class="form-control" formControlName="city"
+                         [class.is-invalid]="form.controls.city.invalid && form.controls.city.touched" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="country">Country</label>
+                  <input id="country" type="text" class="form-control" formControlName="country"
+                         [class.is-invalid]="form.controls.country.invalid && form.controls.country.touched" />
+                </div>
+              </div>
+            </form>
+
+            <hr class="my-3" />
+
+            <h2 class="checkout-form-title">Payment</h2>
+            @if (stripeAvailable) {
+              @if (stripeError()) {
+                <div class="alert alert-danger" role="alert">
+                  <i class="bi bi-exclamation-triangle"></i> {{ stripeError() }}
+                </div>
+              } @else {
+                <div class="border rounded p-3">
+                  <p class="text-muted small mb-2">Enter your card details below.</p>
+                  <!-- Stripe mounts the Card Element into this container at runtime. -->
+                  <div #cardElement class="form-control" style="height: auto; padding: 12px;"></div>
+                  @if (!stripeReady()) {
+                    <p class="text-muted small mb-0 mt-2">
+                      <span class="spinner-border spinner-border-sm me-1"></span>
+                      Loading secure payment form…
+                    </p>
+                  }
+                  @if (cardError()) {
+                    <p class="text-danger small mb-0 mt-2">{{ cardError() }}</p>
+                  }
+                </div>
+                <button type="button" class="add-to-cart-button mt-3"
+                        [disabled]="processing() || !stripeReady()" (click)="pay()">
+                  @if (processing()) {
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+                  }
+                  Pay {{ total() | currency:'INR':'symbol':'1.0-0' }}
+                </button>
+                <p class="text-muted small mt-2 mb-0">
+                  Test card: 4242 4242 4242 4242, any future expiry, any CVC.
+                </p>
+              }
+            } @else {
+              <div class="alert alert-warning" role="alert">
+                <i class="bi bi-exclamation-triangle"></i>
+                Card payments are unavailable offline (no Stripe key configured).
+                You can still simulate placing the order to test the flow.
+              </div>
+              <button type="button" class="buy-now-button" [disabled]="processing()"
+                      (click)="simulateOrder()">
+                @if (processing()) {
+                  <span class="spinner-border spinner-border-sm me-2"></span>
+                }
+                Simulate order ({{ total() | currency:'INR':'symbol':'1.0-0' }})
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Order summary -->
+      <div class="col-lg-5">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h2 class="h5 mb-3">Order Summary</h2>
+            @for (item of cart().items; track item.itemId) {
+              <div class="d-flex justify-content-between mb-2">
+                <span>{{ item.product.name }} &times; {{ item.quantity }}</span>
+                <span>{{ item.totalPrice | currency:'INR':'symbol':'1.0-0' }}</span>
+              </div>
+            } @empty {
+              <p class="text-muted">Your cart is empty.</p>
+            }
+            <hr />
+            <div class="d-flex justify-content-between fw-bold">
+              <span>Total</span>
+              <span>{{ total() | currency:'INR':'symbol':'1.0-0' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>
