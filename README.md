@@ -10,7 +10,7 @@ GameGear is a full‑stack e‑commerce platform with a **Spring Boot** backend 
 
 - **Framework:** Spring Boot 3 (Java 21)
 - **Layers:**
-  - **Controller layer** – `controller/*` (e.g. `ProductController`, `AuthController`, `OrderController`, `CartController`)
+  - **Controller layr** – `controller/*` (e.g. `ProductController`, `AuthController`, `OrderController`, `CartController`)
   - **Service layer** – `service/*` (business logic, image similarity, AI, Stripe payment orchestration)
   - **Repository layer** – `repository/*` (Spring Data JPA over PostgreSQL)
   - **Domain model** – `model/*` (User, Role, Product, Category, Cart, Order, Image, etc.)
