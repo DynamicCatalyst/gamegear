@@ -1,14 +1,15 @@
-# 🎮 GameGear – Java Full Stack E‑commerce (Spring Boot, Spring AI, Stripe)
+#  GameGear – FullStack E‑commerce (Spring Boot, Spring AI, Stripe) 🎮
 
-GameGear is a full‑stack e‑commerce platform with a **Spring Boot** backend and an **Angular** frontend, backed by **PostgreSQL** and runnable end‑to‑end with a single `docker compose` command. It covers secure APIs, Stripe payments, AI‑powered image search, and JWT‑based authentication with role‑based access.
+GameGear is a full‑stack e‑commerce website with a **Spring Boot** backend and **Angular** frontend, using **PostgreSQL** with help of`docker compose`. 
+It covers secure APIs, Stripe payments, AI‑powered image search, and JWT‑based authentication with role‑based access.
 
 ---
 
-## 🧩 Project Overview
+## Project Overview
 
 ### Backend
 
-- **Framework:** Spring Boot 3 (Java 21)
+- **Framework:** Spring Boot
 - **Layers:**
   - **Controller layr** – `controller/*` (e.g. `ProductController`, `AuthController`, `OrderController`, `CartController`)
   - **Service layer** – `service/*` (business logic, image similarity, AI, Stripe payment orchestration)
@@ -37,31 +38,6 @@ GameGear is a full‑stack e‑commerce platform with a **Spring Boot** backend 
 - **Payments:** Stripe.js + Card Element on the checkout page
 - **UI:** Bootstrap 5 + bootstrap-icons
 
----
-
-## 🚀 Running Locally with Docker
-
-The whole stack (PostgreSQL + Spring Boot + Angular) builds and runs from the repo root:
-
-```bash
-# 1. Backend secrets (optional for a basic run — Stripe/AI features stay off if unset)
-cp Backendgg/.env.example Backendgg/.env   # then fill in values as needed
-
-# 2. Build and start everything
-docker compose up --build
-```
-
-| Service  | URL                     |
-|----------|-------------------------|
-| Frontend | http://localhost:4200   |
-| Backend  | http://localhost:8081   |
-| Database | localhost:5432          |
-
-The frontend (nginx) serves the built Angular app and the browser calls the backend API at `/api/v1`.
-
----
-
-## 🌐 API Overview
 
 ### Live URLs
 
@@ -73,7 +49,7 @@ The frontend (nginx) serves the built Angular app and the browser calls the back
   - Access tokens (short‑lived)
   - Refresh tokens (long‑lived)
 
-**Key patterns (/api/v1):**
+**urls (/api/v1):**
 
 | Area  | Example pattern                         | Notes                         |
 |-------|-----------------------------------------|-------------------------------|
@@ -82,7 +58,7 @@ The frontend (nginx) serves the built Angular app and the browser calls the back
 | Cart  | `/carts/**`, `/cartItems/**`            | Cart operations (secured)     |
 | Orders| `/orders/**`                            | Order creation/history        |
 
-### Product API (selected endpoints)
+### Product API endpoints
 
 **prefixed with** `/api/v1`:
 
@@ -146,47 +122,6 @@ _demo admin:_
 
 [▶ Admin Flow Demo](https://player.vimeo.com/video/1141165207)
 
-
-## 🛠️ Technologies
-
-### Backend
-
-- **Language:** Java 21  
-- **Framework:** Spring Boot 3
-- **Security:** Spring Security, JWT (JJWT), BCrypt
-- **Database:** PostgreSQL
-- **ORM:** Hibernate / Spring Data JPA
-- **AI & Vector DB:** Spring AI, Chroma Vector Store, OpenAI
-- **Payments:** Stripe (`stripe-java`)
-- **Build Tool:** Maven
-
-### Frontend
-
-- Angular (standalone components, signals)
-- TypeScript
-- RxJS
-- Stripe.js + Card Element
-- Bootstrap 5
-
-### Infrastructure
-
-- Docker + Docker Compose (PostgreSQL, backend, nginx-served frontend)
-
----
-
 ## 🚀 Future Upgrades
-
-### Email Notification Service:  
- - Send order confirmations, password resets, promotional emails.
-
-### Product Review & Ratings:  
-
- - Enable users to review products and rate them.
-
-### Wishlist & Favorites:  
-
- - Allow users to save favorite products for later.
-
-### Data Analytics & Dashboard:  
-
- - Build endpoints for analytics on sales, user activity, and product performance.
+- Enable users to review products and rate them.
+-  Product Review & Ratings
