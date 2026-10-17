@@ -16,33 +16,32 @@ It also covers
 
 - **Framework:** Spring Boot
 - **Layers:**
-  - **Controller layr** – `controller/*` (e.g. `ProductController`, `AuthController`, `OrderController`, `CartController`)
-  - **Service layer** – `service/*` (business logic, image similarity, AI, Stripe payment orchestration)
-  - **Repository layer** – `repository/*` (Spring Data JPA over PostgreSQL)
+  - **Controller layr** – `controller/*`
+  - **Service layer** – `service/*` 
+  - **Repository layer** – `repository/*`
   - **Domain model** – `model/*` (User, Role, Product, Category, Cart, Order, Image, etc.)
-  - **DTOs / Requests / Responses** – `dtos/*`, `request/*`, `response/*` (API contracts)
+  - **DTOs / Requests / Responses** – `dtos/*`, `request/*`, `response/*`
 - **Security:**
-  - Spring Security with **JWT** (access + refresh tokens)
+  - Spring Security with **JWT**
   - Role‑based authorization (`ROLE_USER`, `ROLE_ADMIN`)
-  - Stateless sessions, CORS configuration, and secured URL patterns
-- **Data & Persistence:**
+  - CORS configuration
+- **Database:**
   - PostgreSQL as main database
   - JPA + Hibernate
 - **AI & Vector Search:**
   - Spring AI + OpenAI
-  - Chroma Vector Store for **image similarity search** (e.g. “search products by image”)
+  - Chroma Vector Store for **image similarity search**
 - **Payments:**
-  - Stripe integration (`stripe-java`) for secure checkout
+  - Stripe integrated for secure checkout
 
 ### Frontend
 
-- **Framework:** Angular (standalone components, signals)
+- **Framework:** Angular 
 - **State:** Signal-based services (auth, cart, search, pagination)
-- **HTTP:** `HttpClient` with an auth interceptor that attaches the JWT and transparently refreshes it on a 401
-- **Routing:** lazy-loaded feature routes with functional route guards for user/admin areas
+- **HTTP:** `HttpClient` with an auth interceptor
+- **Routing:** lazy-loaded 
 - **Payments:** Stripe.js + Card Element on the checkout page
 - **UI:** Bootstrap 5 + bootstrap-icons
-
 
 ### Live URLs
 
@@ -51,8 +50,8 @@ It also covers
 ### Authentication & Authorization
 
 - **JWT‑based auth** with:
-  - Access tokens (short‑lived)
-  - Refresh tokens (long‑lived)
+  - Access tokens 
+  - Refresh tokens
 
 **urls (/api/v1):**
 
