@@ -1,7 +1,12 @@
 #  GameGear – FullStack E‑commerce (Spring Boot, Spring AI, Stripe) 🎮
 
 GameGear is a full‑stack e‑commerce website with a **Spring Boot** backend and **Angular** frontend, using **PostgreSQL** with help of`docker compose`. 
-It covers secure APIs, Stripe payments, AI‑powered image search, and JWT‑based authentication with role‑based access.
+
+It also covers 
+1. secure APIs
+2. Stripe payments
+3. AI‑powered image search
+4.  JWT‑based authentication with role‑based access.
 
 ---
 
