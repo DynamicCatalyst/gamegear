@@ -19,7 +19,7 @@ It also covers
   - **Controller layr** – `controller/*`
   - **Service layer** – `service/*` 
   - **Repository layer** – `repository/*`
-  - **Domain model** – `model/*` (User, Role, Product, Category, Cart, Order, Image, etc.)
+  - **Model** – `model/*` (User, Role, Product, Category, Cart, Order, Image, etc.)
   - **DTOs / Requests / Responses** – `dtos/*`, `request/*`, `response/*`
 - **Security:**
   - Spring Security with **JWT**
